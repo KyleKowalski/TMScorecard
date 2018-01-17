@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TM Scorecard</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/clickyFunctions.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+    <row>
+        <h1>Truly Simple Terraforming Mars Score Card</h1>
+        <!-- <input type="text" id="inputPlayer" placeholder="Enter Player Here:" class="form-control">
+        <button type="button" id="buttonAddPlayer" class="form-control">Add New Player</button> -->
+    </row>
+
+    <row>
+        <h1>Scoreboard</h1>
+        Oxygen: <div id="scoreOxygen">0</div>
+        Temperature: <div id="scoreTemperature">-30</div>
+        Water: <div id="scoreWater">9</div>
+        Venus %: <div id="venusPercent">0</div>
+        <button id="nextRound">Next Round</button>
+    </row>
+
+    <row class="float-left center">
+        User: <p id="user1" class="userName">Kyle</p>
+        <hr>
+        Terraform Rating: <div id="trTotal1">20</div>
+        <button id="trTotalPlus1">+</button><button id="trTotalMinus1">-</button>
+        <hr>
+        Money: <div id="moneyTotal1">40</div>
+        <button id="moneyTotalPlus1">+</button><button id="moneyTotalMinus1">-</button>
+        <br>        
+        Money Per Round: <div id="moneyPerRound1">0</div>
+        <button id="moneyRoundPlus1">+</button><button id="moneyRoundMinus1">-</button>
+        <hr>
+        Steel: <div id="steelTotal1">0</div> 
+        <button id="steelTotalPlus1">+</button><button id="steelTotalMinus1">-</button>
+        <br>
+        Steel Per Round: <div id="steelPerRound1">0</div>
+        <button id="steelRoundPlus1">+</button><button id="steelRoundMinus1">-</button>
+        <hr>
+        Titanium: <div id="titaniumTotal1">0</div> 
+        <button id="titaniumTotalPlus1">+</button><button id="titaniumTotalMinus1">-</button>
+        <br>
+        Titanium Per Round: <div id="titaniumPerRound1">0</div>
+        <button id="titaniumRoundPlus1">+</button><button id="titaniumRoundMinus1">-</button>
+        <hr>
+        Plants: <div id="plantsTotal1">0</div> 
+        <button id="plantsTotalPlus1">+</button><button id="plantsTotalMinus1">-</button>
+        <br>
+        Plants Per Round: <div id="plantsPerRound1">0</div>
+        <button id="plantsRoundPlus1">+</button><button id="plantsRoundMinus1">-</button>
+        <hr>
+        Energy: <div d="energyTotal1">0</div> 
+        <button id="energyTotalPlus1">+</button><button id="energyTotalMinus1">-</button>
+        <br>
+        Energy Per Round: <div id="energyPerRound1">0</div>
+        <button id="energyRoundPlus1">+</button><button id="energyRoundMinus1">-</button>
+        <hr>
+        Heat: <div id="heatTotal1">0</div> 
+        <button id="heatTotalPlus1">+</button><button id="heatTotalMinus1">-</button>
+        <br>
+        Heat Per Round: <div id="heatPerRound1">0</div>
+        <button id="heatRoundPlus1">+</button><button id="heatRoundMinus1">-</button>
+    </row>
+
+</body>
