@@ -18,7 +18,7 @@
     <row>
         <h1>Truly Simple Terraforming Mars Score Card</h1>
         <!-- <input type="text" id="inputPlayer" placeholder="Enter Player Here:" class="form-control">
-        <button type="button" id="buttonAddPlayer" class="form-control">Add New Player</button> -->
+        <div type="div" id="divAddPlayer" class="form-control">Add New Player</div> -->
     </row>
 
     <row>
@@ -27,50 +27,63 @@
         Temperature: <div id="scoreTemperature">-30</div>
         Water: <div id="scoreWater">9</div>
         Venus %: <div id="venusPercent">0</div>
-        <button id="nextRound">Next Round</button>
+        <div id="nextRound">Next Round</div>
     </row>
 
     <row class="float-left center">
         User: <p id="user1" class="userName">Kyle</p>
         <hr>
         Terraform Rating: <div id="trTotal1">20</div>
-        <div class="btn btn-success" id="trTotalPlus1">+</div><div class="btn btn-danger" id="trTotalMinus1">-</div>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="trTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="trTotal" myTargetId="1">-</div>
         <hr>
         Money: <div id="moneyTotal1">40</div>
-        <button id="moneyTotalPlus1">+</button><button id="moneyTotalMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="moneyTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="moneyTotal" myTargetId="1">-</div>
         <br>        
         Money Per Round: <div id="moneyPerRound1">0</div>
-        <button id="moneyRoundPlus1">+</button><button id="moneyRoundMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="moneyPerRound" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="moneyPerRound" myTargetId="1">-</div>
         <hr>
         Steel: <div id="steelTotal1">0</div> 
-        <button class="clicky btn btn-success" math="plus" myTargetValue="steelTotal" myTargetId="1">+</button><button class="clicky btn btn-danger" math="minus" myTargetValue="steelTotal" myTargetId="1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="steelTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="steelTotal" myTargetId="1">-</div>
         <br>
         Steel Per Round: <div id="steelPerRound1">0</div>
-        <button id="steelRoundPlus1">+</button><button id="steelRoundMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="steelPerRound" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="steelPerRound" myTargetId="1">-</div>
         <hr>
         Titanium: <div id="titaniumTotal1">0</div> 
-        <button id="titaniumTotalPlus1">+</button><button id="titaniumTotalMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="titaniumTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="titaniumTotal" myTargetId="1">-</div>
         <br>
         Titanium Per Round: <div id="titaniumPerRound1">0</div>
-        <button id="titaniumRoundPlus1">+</button><button id="titaniumRoundMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="titaniumPerRound" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="titaniumPerRound" myTargetId="1">-</div>
         <hr>
         Plants: <div id="plantsTotal1">0</div> 
-        <button id="plantsTotalPlus1">+</button><button id="plantsTotalMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="plantsTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="plantsTotal" myTargetId="1">-</div>
         <br>
         Plants Per Round: <div id="plantsPerRound1">0</div>
-        <button id="plantsRoundPlus1">+</button><button id="plantsRoundMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="plantsPerRound" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="plantsPerRound" myTargetId="1">-</div>
         <hr>
-        Energy: <div d="energyTotal1">0</div> 
-        <button id="energyTotalPlus1">+</button><button id="energyTotalMinus1">-</button>
+        Energy: <div id="energyTotal1">0</div> 
+        <div class="clicky btn btn-success" math="plus" myTargetValue="energyTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="energyTotal" myTargetId="1">-</div>
         <br>
         Energy Per Round: <div id="energyPerRound1">0</div>
-        <button id="energyRoundPlus1">+</button><button id="energyRoundMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="energyPerRound" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="energyPerRound" myTargetId="1">-</div>
         <hr>
         Heat: <div id="heatTotal1">0</div> 
-        <button id="heatTotalPlus1">+</button><button id="heatTotalMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="heatTotal" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="heatTotal" myTargetId="1">-</div>
         <br>
         Heat Per Round: <div id="heatPerRound1">0</div>
-        <button id="heatRoundPlus1">+</button><button id="heatRoundMinus1">-</button>
+        <div class="clicky btn btn-success" math="plus" myTargetValue="heatPerRound" myTargetId="1">+</div>
+        <div class="clicky btn btn-danger" math="minus" myTargetValue="heatPerRound" myTargetId="1">-</div>
     </row>
 </body>
 </html>

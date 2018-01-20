@@ -1,23 +1,23 @@
 $(document).ready(function() {
 
-    $("#trTotalPlus1").click(function(){
-        let totalTR = $("#trTotal1").text();
-        totalTR++
-        $("#trTotal1").text(totalTR);
-    });
+    // $("#trTotalPlus1").click(function(){
+    //     let totalTR = $("#trTotal1").text();
+    //     totalTR++
+    //     $("#trTotal1").text(totalTR);
+    // });
 
-    $("#trTotalMinus1").click(function(){
-        let totalTR = $("#trTotal1").text();
-        totalTR--
-        $("#trTotal1").text(totalTR);
-    });
+    // $("#trTotalMinus1").click(function(){
+    //     let totalTR = $("#trTotal1").text();
+    //     totalTR--
+    //     $("#trTotal1").text(totalTR);
+    // });
 
     $(".clicky").click(function(){
-        console.log(this);
+        // console.log(this);
         let myTarget="#"+$(this).attr("myTargetValue")+$(this).attr("myTargetId");
-        console.log(myTarget);
+        // console.log(myTarget);
         let myValue =$(myTarget).text();
-        console.log(`Current value: ${myValue}`);
+        // console.log(`Current value: ${myValue}`);
         if ($(this).attr("math") === "plus") {
             myValue++
         }
