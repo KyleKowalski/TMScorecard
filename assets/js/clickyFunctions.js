@@ -111,21 +111,85 @@ $(document).ready(function() {
     });
 
     $(".clickyTotal").click(function(){
-        // TODO add some collars to the values
-        // TODO alter the targets to the appropriate value (x2 multipliers etc)
         let myTarget="#"+$(this).attr("myTargetValue");
-        let myValue =$(myTarget).text();
+        let myValue = parseInt($(myTarget).text());
+
+        if ($(this).attr("myTargetValue") === "oxygenTotal"){
+            if ($(this).attr("math") === "plus"){
+                if(myValue >= 14){
+                    console.log(`Unable to raise Oxygen - we are at max.`);
+                    return false;
+                }
+            }
+            if ($(this).attr("math") === "minus"){
+                if(myValue <= 0){
+                    console.log(`Unable to lower Oxygen - we are at min.`);
+                    return false;
+                }
+            }
+        }
+
+        if ($(this).attr("myTargetValue") === "tempTotal"){
+            if ($(this).attr("math") === "plus"){
+                if(myValue >= 8){
+                    console.log(`Unable to raise temp - we are at max.`);
+                    return false;
+                }
+            }
+            if ($(this).attr("math") === "minus"){
+                if(myValue <= -30){
+                    console.log(`Unable to lower temp - we are at min.`);
+                    return false;
+                }
+            }
+        }
+
+        if ($(this).attr("myTargetValue") === "waterTotal"){
+            if ($(this).attr("math") === "plus"){
+                if(myValue >= 9){
+                    console.log(`Unable to raise water - we are at max.`);
+                    return false;
+                }
+            }
+            if ($(this).attr("math") === "minus"){
+                if(myValue <= 0){
+                    console.log(`Unable to lower water - we are at min.`);
+                    return false;
+                }
+            }
+        }
+
+        if ($(this).attr("myTargetValue") === "venusTotal"){
+            if ($(this).attr("math") === "plus"){
+                if(myValue >= 30){
+                    console.log(`Unable to raise Venus - we are at max.`);
+                    return false;
+                }
+            }
+            if ($(this).attr("math") === "minus"){
+                if(myValue <= 0){
+                    console.log(`Unable to lower Venus - we are at min.`);
+                    return false;
+                }
+            }
+        }
 
         let playerTrTarget = "#trTotal"+game.currentPlayer;
-        let playerValue = $(playerTrTarget).text();
+        let playerValue = parseInt($(playerTrTarget).text());
+
+        let multiplier = 1;
+        if ($(this).attr("myTargetValue") === "tempTotal" || $(this).attr("myTargetValue") === "venusTotal"){
+            multiplier = 2;
+        }
 
         if ($(this).attr("math") === "plus") {
-            myValue++
-            playerValue++
+            
+            myValue += multiplier;
+            playerValue++;
         }
         else {
-            myValue--
-            playerValue--
+            myValue -= multiplier;
+            playerValue--;
         }
         $(myTarget).text(myValue);
         $(playerTrTarget).text(playerValue);
