@@ -1,23 +1,22 @@
 $(document).ready(function() {
 
-    // $("#trTotalPlus1").click(function(){
-    //     let totalTR = $("#trTotal1").text();
-    //     totalTR++
-    //     $("#trTotal1").text(totalTR);
-    // });
+    let game = {
+        currentPlayer: 1,
+        user1: "user1",
+        user2: "user2",
+        user3: "user3",
+        user4: "user4",
+        user5: "user5",
+    }
 
-    // $("#trTotalMinus1").click(function(){
-    //     let totalTR = $("#trTotal1").text();
-    //     totalTR--
-    //     $("#trTotal1").text(totalTR);
-    // });
+    $('input[name="playerRadioButton"]').change(function(){
+        game.currentPlayer = this.value
+    });
+
 
     $(".clicky").click(function(){
-        // console.log(this);
-        let myTarget="#"+$(this).attr("myTargetValue")+$(this).attr("myTargetId");
-        // console.log(myTarget);
+        let myTarget="#"+$(this).attr("myTargetValue")+game.currentPlayer;
         let myValue =$(myTarget).text();
-        // console.log(`Current value: ${myValue}`);
         if ($(this).attr("math") === "plus") {
             myValue++
         }
@@ -26,6 +25,28 @@ $(document).ready(function() {
         }
         $(myTarget).text(myValue);
         // TODO some sort of logging here
-    })
+    });
+
+    $(".clickyTotal").click(function(){
+        // TODO add some collars to the values
+        // TODO alter the targets to the appropriate value (x2 multipliers etc)
+        let myTarget="#"+$(this).attr("myTargetValue");
+        let myValue =$(myTarget).text();
+
+        let playerTrTarget = "#trTotal"+game.currentPlayer;
+        let playerValue = $(playerTrTarget).text();
+
+        if ($(this).attr("math") === "plus") {
+            myValue++
+            playerValue++
+        }
+        else {
+            myValue--
+            playerValue--
+        }
+        $(myTarget).text(myValue);
+        $(playerTrTarget).text(playerValue);
+        // TODO some sort of logging here
+    });
 
 }) // End document.ready
