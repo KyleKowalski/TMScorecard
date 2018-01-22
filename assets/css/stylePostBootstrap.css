@@ -10,6 +10,10 @@ th {
     background-color: gray;
 }
 
+th, tr, td {
+    text-align: center;
+}
+
 tr:nth-child(odd) {
     /* border: 1px solid rgba(255,0,0,1); */
     background-color: lightgray;
@@ -17,4 +21,27 @@ tr:nth-child(odd) {
 
 tr:nth-child(even) {
     /* border: 1px solid rgba(0,255,0,1); */
+}
+
+.currentPlayer {
+    border: 2px solid black;
+    font-size: 200%;
+}
+
+.form-control {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.startingPlayer {
+    color: rgba(255,200,0,1);
+    background-color: black;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    margin: 5%;
 }
