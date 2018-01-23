@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+    // Enable navigation prompt
+    window.onbeforeunload = function() {
+        return true;
+    };
+
     let game = {
         roundNumber: 1,
         currentPlayer: 1,
