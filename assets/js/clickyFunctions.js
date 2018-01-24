@@ -144,13 +144,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "oxygenTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 14){
-                    console.log(`Unable to raise Oxygen - we are at max.`);
+                    callErrorModal(`Unable to raise Oxygen - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= 0){
-                    console.log(`Unable to lower Oxygen - we are at min.`);
+                    callErrorModal(`Unable to lower Oxygen - we are at min.`);
                     return false;
                 }
             }
@@ -159,13 +159,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "tempTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 8){
-                    console.log(`Unable to raise temp - we are at max.`);
+                    callErrorModal(`Unable to raise temp - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= -30){
-                    console.log(`Unable to lower temp - we are at min.`);
+                    callErrorModal(`Unable to lower temp - we are at min.`);
                     return false;
                 }
             }
@@ -174,13 +174,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "waterTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 9){
-                    console.log(`Unable to raise water - we are at max.`);
+                    callErrorModal(`Unable to raise water - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= 0){
-                    console.log(`Unable to lower water - we are at min.`);
+                    callErrorModal(`Unable to lower water - we are at min.`);
                     return false;
                 }
             }
@@ -189,13 +189,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "venusTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 30){
-                    console.log(`Unable to raise Venus - we are at max.`);
+                    callErrorModal(`Unable to raise Venus - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= 0){
-                    console.log(`Unable to lower Venus - we are at min.`);
+                    callErrorModal(`Unable to lower Venus - we are at min.`);
                     return false;
                 }
             }
@@ -249,6 +249,107 @@ $(document).ready(function() {
         $('#errorModal').modal('hide');
     });
 
+    $('#buyCard').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 3) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 3);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy another card.`);
+            return false;
+        }
+    });
+
+    $('#buyGreeneryWithPlants').click(function(){
+        let plantsCurrentlyAvailable = parseInt($('#plantsTotal'+game.currentPlayer).text());
+        if (plantsCurrentlyAvailable >= 8) {
+            $('#plantsTotal'+game.currentPlayer).text(plantsCurrentlyAvailable - 8);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough plants to buy a greenery.`);
+            return false;
+        }
+    });
+    
+    $('#buyGreeneryWithMoney').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 23) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 23);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a greenery.`);
+            return false;
+        }
+    
+    });
+    
+    $('#buyAquafer').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        let currentAquafers = parseInt($('#waterTotal').text())
+        if (moneyCurrentlyAvailable >= 18 && currentAquafers <= 9) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 18);
+            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+            $('#waterTotal').text(currentAquafers + 1);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy an aquafer or none are available.`);
+            return false;
+        }
+    
+    });
+    
+    $('#buyPowerPlant').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 11) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 11);
+            let currentEnergyPerRound = parseInt($('#energyPerRound'+game.currentPlayer).text());
+            $('#energyPerRound'+game.currentPlayer).text(currentEnergyPerRound + 1);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a power plant.`);
+            return false;
+        }
+    
+    });
+    
+    $('#buyCity').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 25) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 25);
+            let currentMoneyPerRound = parseInt($('#moneyPerRound'+game.currentPlayer).text());
+            $('#moneyPerRound'+game.currentPlayer).text(currentMoneyPerRound + 1);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a city.`);
+            return false;
+        }
+
+    });
+    
+    $('#buyMeteor').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        let currentTemp = parseInt($('#tempTotal').text());
+        if (moneyCurrentlyAvailable >= 14 && currentTemp <= 8) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 14);
+            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+            $('#tempTotal').text(currentTemp + 2);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a meteor.`);
+            return false;
+        }
+
+    });
+    
     function setupNextRound() {
         // 1. raise the round number
         game.roundNumber++;
