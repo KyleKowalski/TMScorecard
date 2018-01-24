@@ -451,6 +451,38 @@ $(document).ready(function() {
             $('#bigSwingInput').val('');
         }
     });
+
+    // These remove the precision needed to click a different player
+    // You can click any of the player stats and you're good to go.  
+    $('.player1').click(function(){
+        $('#player1Radio').prop("checked", true);
+        game.currentPlayer = 1;
+        updateCurrentPlayer();
+    });
+
+    $('.player2').click(function(){
+        $('#player2Radio').prop("checked", true);
+        game.currentPlayer = 2;
+        updateCurrentPlayer();
+    });
+
+    $('.player3').click(function(){
+        $('#player3Radio').prop("checked", true);
+        game.currentPlayer = 3;
+        updateCurrentPlayer();
+    });
+
+    $('.player4').click(function(){
+        $('#player4Radio').prop("checked", true);
+        game.currentPlayer = 4;
+        updateCurrentPlayer();
+    });
+
+    $('.player5').click(function(){
+        $('#player5Radio').prop("checked", true);
+        game.currentPlayer = 5;
+        updateCurrentPlayer();
+    });
     
 
 }); // End document.ready
