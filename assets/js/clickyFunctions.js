@@ -1,15 +1,5 @@
 $(document).ready(function() {
-
-    // TODO buttons for common tasks
-    // 1. Buy a Card
-    // 2. Buy a forest
-    // 3. Get/Spend money (others as well via dropdown?) easier
-    // 3a.  something like?  
-    //
-    // <dropdown>
-    // -20 / -10 / -5 / -1 <input> +1 / +5  / +10 / +20
-    // <submit>
-
+    // TODO list
     // 4 Logging (click to view log?)
     // 5. CSS - more like the colors of the board
 
@@ -289,16 +279,21 @@ $(document).ready(function() {
     $('#buyAquafer').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
         let currentAquafers = parseInt($('#waterTotal').text())
-        if (moneyCurrentlyAvailable >= 18 && currentAquafers <= 9) {
-            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 18);
-            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
-            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
-            $('#waterTotal').text(currentAquafers + 1);
-            // TODO logging here.
+        if (currentAquafers < 9) {
+            if (moneyCurrentlyAvailable >= 18) {
+                $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 18);
+                let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#waterTotal').text(currentAquafers + 1);
+                // TODO logging here.
+            }
+            else {
+                callErrorModal(`You don't have enough money to buy an aquafer.`);
+                return false;
+            }
         }
         else {
-            callErrorModal(`You don't have enough money to buy an aquafer or none are available.`);
-            return false;
+            callErrorModal(`There are no aquafers available for purchase.`);
         }
     
     });
@@ -336,16 +331,21 @@ $(document).ready(function() {
     $('#buyMeteor').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
         let currentTemp = parseInt($('#tempTotal').text());
-        if (moneyCurrentlyAvailable >= 14 && currentTemp <= 8) {
-            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 14);
-            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
-            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
-            $('#tempTotal').text(currentTemp + 2);
-            // TODO logging here.
+        if (currentTemp < 8) {
+            if (moneyCurrentlyAvailable >= 14) {
+                $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 14);
+                let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#tempTotal').text(currentTemp + 2);
+                // TODO logging here.
+            }
+            else {
+                callErrorModal(`You don't have enough money to buy a meteor.`);
+                return false;
+            }
         }
         else {
-            callErrorModal(`You don't have enough money to buy a meteor.`);
-            return false;
+            callErrorModal(`The temperature can no longer be raised.`);
         }
 
     });
