@@ -23,7 +23,7 @@ $(document).ready(function() {
         roundNumber: 1,
         currentPlayer: 1,
         startingPlayer: 1,
-        activePlayers: 5,
+        activePlayers: 2,
         player1: "Player1",
         player2: "Player2",
         player3: "Player3",
@@ -293,10 +293,20 @@ $(document).ready(function() {
     $('#bigSwingForm').submit(function(){
         event.preventDefault();
         // We need to grab the type of thing we are manipulating and the amount and the player - then do the math.
-
         let typeOfThingToChange = $('#bigSwingDropDown').find(":selected").val();
+        let valueOfThingToChange = $('#bigSwingInput').val();
+        let currentValueOfThingToChange = parseInt($('#'+typeOfThingToChange+game.currentPlayer).text());
 
-        console.log(`We are changing: ${typeOfThingToChange} for player: ${game.currentPlayer}`);
+        if (valueOfThingToChange === '' || valueOfThingToChange > 100 || valueOfThingToChange < -100){
+            console.log(`Value to change is in a bad range - fix it before submission`);
+            // TODO error to user here.
+            return false;
+        }
+
+        console.log(`We are changing: ${typeOfThingToChange} for player: ${game.currentPlayer} changed by '${valueOfThingToChange}' staring at: ${currentValueOfThingToChange}`);
+
+        
+
     });
     
 
