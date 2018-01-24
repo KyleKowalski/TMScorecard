@@ -1,5 +1,19 @@
 $(document).ready(function() {
 
+    // TODO buttons for common tasks
+    // 1. Buy a Card
+    // 2. Buy a forest
+    // 3. Get/Spend money (others as well via dropdown?) easier
+    // 3a.  something like?  
+    //
+    // <dropdown>
+    // -20 / -10 / -5 / -1 <input> +1 / +5  / +10 / +20
+    // <submit>
+
+    // 4 Logging (click to view log?)
+    // 5. CSS - more like the colors of the board
+
+
     // Enable navigation prompt
     window.onbeforeunload = function() {
         return true;
@@ -17,12 +31,13 @@ $(document).ready(function() {
         player5: "Player5",
     }
 
-    $('#setupGameModal').toggle();
+    $('#setupGameModal').modal('show');
 
     function setupGame() {
         getAndSetPlayerNames();
         hideInactivePlayers();
         setStartingPlayer();
+        $('#setupGameModal').modal('hide');
     }
 
     function getAndSetPlayerNames() {
@@ -216,7 +231,6 @@ $(document).ready(function() {
     });
 
     $('#confirmSetup').click(function(){
-        $('#setupGameModal').toggle();
         setupGame();
     })
 
@@ -275,6 +289,15 @@ $(document).ready(function() {
             $('#heatTotal'+i).text(heatCurrentlyAvailable + heatPerRound)
         }
     }
+
+    $('#bigSwingForm').submit(function(){
+        event.preventDefault();
+        // We need to grab the type of thing we are manipulating and the amount and the player - then do the math.
+
+        let typeOfThingToChange = $('#bigSwingDropDown').find(":selected").val();
+
+        console.log(`We are changing: ${typeOfThingToChange} for player: ${game.currentPlayer}`);
+    });
     
 
 }); // End document.ready
