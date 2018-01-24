@@ -25,7 +25,7 @@
 
 <body>
     <row>
-        <h2 class="text-center">Truly Simple Terraforming Mars Scorecard</h2>
+        <h3 class="text-center">Truly Simple Terraforming Mars Scorecard</h3>
     </row>
 
     <wrapper>
@@ -69,8 +69,40 @@
     </section>
 
     <section>
+        <div class="col-sm-4 col-xs-12">
             <h3 id="roundNumber" class="text-center">Round Number: 1</h3>
             <div id="nextRound" class="btn btn-primary form-control">Next Round</div>
+        </div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="col-sm-4 col-xs-12">
+                <form id="bigSwingForm">
+                    <select id="bigSwingDropDown" class="form-control">
+                        <option value="moneyTotal" selected>Money</option>
+                        <option value="steelTotal">Steel</option>
+                        <option value="titaniumTotal">Titanium</option>
+                        <option value="plantsTotal">Plants</option>
+                        <option value="energyTotal">Energy</option>
+                        <option value="heatTotal">Heat</option>
+                    </select>
+                    <input id="bigSwingInput" type="number" min="-100" max="100" placeholder="Enter the value to add/remove..." class="form-control">
+                    <input type="submit" class="form-control btn btn-primary">
+                </form>
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                <div id="buyCard" class="btn btn-info form-control" title="Remove 3 money to purchase a card">Buy a card </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-8 align-middle">Buy a shrubbery</div>
+                    <div id="buyGreeneryWithPlants" class="col-xs-2 btn btn-success" title="Remove 8 plants to purchase a forest/greenery, increase oxygen by 1 (if possible), and add 1 Terraforming Point (if possible)">(p)</div>
+                    <div id="buyGreeneryWithMoney" class="col-xs-2 btn btn-success" title="Remove 23 money to purchase a forest/greenery, increase oxygen by 1 (if possible), and add 1 Terraforming Point (if possible)">($)</div>
+                </div>
+                <div id="buyAquafer" class="btn btn-primary form-control" title="Remove 18 money to purchase an aquafer and add 1 Terraforming Point">Buy an aquafer</div>
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                    <div id="buyPowerPlant" class="btn btn-warning form-control" title="Remove 11 money and get one power per turn">Buy a power plant</div>
+                    <div id="buyCity" class="btn btn-default form-control" title="Remove 25 money, place a city, and get 1 gold per turn">Buy a city</div>
+                    <div id="buyMeteor" class="btn btn-danger form-control" title="Remove 14 money and raise the temperature 1 heat">Buy a meteor (temp)</div>
+            </div>
+        </div>
     </section>
 
     <section>
@@ -79,17 +111,17 @@
                 <tr>
                     <th></th>
                     <th>Add/Remove</th>
-                    <th id="player1Id" class="userName player1 currentPlayer"><input type="radio" name="playerRadioButton" value="1" checked><div id="player1Label" class="pull-left"></div><br></th>
-                    <th id="player2Id" class="userName player2"><input type="radio" name="playerRadioButton" value="2"><div id="player2Label" class="pull-left"></div><br></th>
-                    <th id="player3Id" class="userName player3"><input type="radio" name="playerRadioButton" value="3"><div id="player3Label" class="pull-left"></div><br></th>
-                    <th id="player4Id" class="userName player4"><input type="radio" name="playerRadioButton" value="4"><div id="player4Label" class="pull-left"></div><br></th>
-                    <th id="player5Id" class="userName player5"><input type="radio" name="playerRadioButton" value="5"><div id="player5Label" class="pull-left"></div><br></th>
+                    <th id="player1Id" class="userName player1 currentPlayer"><input id="player1Radio" type="radio" name="playerRadioButton" value="1" checked="checked"><div id="player1Label" class="pull-left"></div><br></th>
+                    <th id="player2Id" class="userName player2"><input id="player2Radio" type="radio" name="playerRadioButton" value="2"><div id="player2Label" class="pull-left"></div><br></th>
+                    <th id="player3Id" class="userName player3"><input id="player3Radio" type="radio" name="playerRadioButton" value="3"><div id="player3Label" class="pull-left"></div><br></th>
+                    <th id="player4Id" class="userName player4"><input id="player4Radio" type="radio" name="playerRadioButton" value="4"><div id="player4Label" class="pull-left"></div><br></th>
+                    <th id="player5Id" class="userName player5"><input id="player5Radio" type="radio" name="playerRadioButton" value="5"><div id="player5Label" class="pull-left"></div><br></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Terraform Rating:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="trTotal">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="trTotal">-</button>
                     </td>
@@ -101,7 +133,7 @@
                 </tr>
                 <tr>
                     <td>Money:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="moneyTotal" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="moneyTotal" myTargetId="1">-</button>
                     </td>
@@ -113,7 +145,7 @@
                 </tr>    
                 <tr>
                     <td>Money Per Round:</td> 
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="moneyPerRound" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="moneyPerRound" myTargetId="1">-</button>
                     </td>
@@ -125,7 +157,7 @@
                 </tr>    
                 <tr>
                     <td>Steel:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="steelTotal" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="steelTotal" myTargetId="1">-</button>
                     </td>    
@@ -137,7 +169,7 @@
                 </tr>    
                 <tr>
                     <td>Steel Per Round:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="steelPerRound" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="steelPerRound" myTargetId="1">-</button>
                     </td>
@@ -149,7 +181,7 @@
                 </tr>    
                 <tr>
                     <td>Titanium:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="titaniumTotal" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="titaniumTotal" myTargetId="1">-</button>
                     </td>
@@ -161,7 +193,7 @@
                 </tr>    
                 <tr>
                     <td>Titanium Per Round:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="titaniumPerRound" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="titaniumPerRound" myTargetId="1">-</button>
                     </td>
@@ -173,7 +205,7 @@
                 </tr>    
                 <tr>
                     <td>Plants:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="plantsTotal" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="plantsTotal" myTargetId="1">-</button>
                     </td>
@@ -185,7 +217,7 @@
                 </tr>    
                 <tr>
                     <td>Plants Per Round:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="plantsPerRound" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="plantsPerRound" myTargetId="1">-</button>
                     </td>
@@ -197,7 +229,7 @@
                 </tr>    
                 <tr>
                     <td>Energy:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="energyTotal" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="energyTotal" myTargetId="1">-</button>
                     </td>
@@ -209,7 +241,7 @@
                 </tr>    
                 <tr>
                     <td>Energy Per Round:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="energyPerRound" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="energyPerRound" myTargetId="1">-</button>
                     </td>
@@ -221,7 +253,7 @@
                 </tr>    
                 <tr>
                     <td>Heat:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="heatTotal" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="heatTotal" myTargetId="1">-</button>
                     </td>
@@ -233,7 +265,7 @@
                 </tr>    
                 <tr>
                     <td>Heat Per Round:</td>
-                    <td>
+                    <td class="buttonsForCSS">
                         <button class="clicky btn btn-success" math="plus" myTargetValue="heatPerRound" myTargetId="1">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="heatPerRound" myTargetId="1">-</button>
                     </td>
@@ -248,49 +280,58 @@
     </section>
     </wrapper>
     <div id="nextRoundModal" class="modal">
-            <div class="modal-content">
-                <h2 class="text-center">Are you sure you want to do the next round?</h2>
-                <br><br>
-                <button id="confirmNextRound" class="btn btn-success form-control">Yep, next round please!</button>
-                <br><br>
-                <button id="notYetNextRound" class="btn btn-danger form-control">Noo!  Go back!</button>
-              
-            </div>
+        <div class="modal-content">
+            <h2 class="text-center">Are you sure you want to do the next round?</h2>
+            <br><br>
+            <button id="confirmNextRound" class="btn btn-success form-control">Yep, next round please!</button>
+            <br><br>
+            <button id="notYetNextRound" class="btn btn-danger form-control">Noo!  Go back!</button>
+            
+        </div>
     </div>
     <div id="setupGameModal" class="modal">
-            <div class="modal-content">
-                <h2 class="text-center">Welcome to the Truly Simple Terraforming Mars Scorecard</h2>
-                <br><br>
-                <h3 class="text-center">Please select the number of players...</h3>
-                <div class="text-center">
-                    <input type="radio" name="choosePlayersRadioButton" value="1">1
-                    <input type="radio" name="choosePlayersRadioButton" value="2" checked>2
-                    <input type="radio" name="choosePlayersRadioButton" value="3">3
-                    <input type="radio" name="choosePlayersRadioButton" value="4">4
-                    <input type="radio" name="choosePlayersRadioButton" value="5">5
-                </div>
-                <div id="player1Div">
-                    <div class="pull-left">Player1:</div>
-                    <input type="text" id="player1Name" class="form-control" placeholder="Enter player 1's name here...">
-                </div>
-                <div id="player2Div">
-                    <div class="pull-left">Player2:</div>
-                    <input type="text" id="player2Name" class="form-control" placeholder="Enter player 2's name here...">
-                </div>
-                <div id="player3Div" hidden>
-                    <div class="pull-left">Player3:</div>
-                    <input type="text" id="player3Name" class="form-control" placeholder="Enter player 3's name here...">
-                </div>
-                <div id="player4Div" hidden>
-                    <div class="pull-left">Player4:</div>
-                    <input type="text" id="player4Name" class="form-control" placeholder="Enter player 4's name here...">
-                </div>
-                <div id="player5Div" hidden>
-                    <div class="pull-left">Player5:</div>
-                    <input type="text" id="player5Name" class="form-control" placeholder="Enter player 5's name here...">
-                </div>
-                <button id="confirmSetup" class="btn btn-success form-control">Let's get started!</button>
+        <div class="modal-content">
+            <h2 class="text-center">Welcome to the Truly Simple Terraforming Mars Scorecard</h2>
+            <br><br>
+            <h3 class="text-center">Please select the number of players...</h3>
+            <div class="text-center">
+                <input type="radio" name="choosePlayersRadioButton" value="1">1
+                <input type="radio" name="choosePlayersRadioButton" value="2" checked>2
+                <input type="radio" name="choosePlayersRadioButton" value="3">3
+                <input type="radio" name="choosePlayersRadioButton" value="4">4
+                <input type="radio" name="choosePlayersRadioButton" value="5">5
             </div>
+            <div id="player1Div">
+                <div class="pull-left">Player1:</div>
+                <input type="text" id="player1Name" class="form-control" placeholder="Enter player 1's name here...">
+            </div>
+            <div id="player2Div">
+                <div class="pull-left">Player2:</div>
+                <input type="text" id="player2Name" class="form-control" placeholder="Enter player 2's name here...">
+            </div>
+            <div id="player3Div" hidden>
+                <div class="pull-left">Player3:</div>
+                <input type="text" id="player3Name" class="form-control" placeholder="Enter player 3's name here...">
+            </div>
+            <div id="player4Div" hidden>
+                <div class="pull-left">Player4:</div>
+                <input type="text" id="player4Name" class="form-control" placeholder="Enter player 4's name here...">
+            </div>
+            <div id="player5Div" hidden>
+                <div class="pull-left">Player5:</div>
+                <input type="text" id="player5Name" class="form-control" placeholder="Enter player 5's name here...">
+            </div>
+            <button id="confirmSetup" class="btn btn-success form-control">Let's get started!</button>
+        </div>
     </div>
+    <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <h2 class="text-center">Unable to complete your request.</h2>
+                <br><br>
+                <h2><div class="text-center" id="errorDiv">Default error should be filled in.</div></h2>
+                <br><br>
+                <button id="closeErrorModal" class="btn btn-danger form-control">Oh, ok, let's go back!</button>
+            </div>
+        </div>
 </body>
 </html>

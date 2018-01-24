@@ -1,6 +1,10 @@
 $(document).ready(function() {
+    // TODO list
+    // 4 Logging (click to view log?)
+    // 5. CSS - more like the colors of the board
 
-    // Enable navigation prompt
+
+    // This will propt if the user tries to close/refresh the screen (since the entire app is not databased and just memory based)
     window.onbeforeunload = function() {
         return true;
     };
@@ -9,7 +13,7 @@ $(document).ready(function() {
         roundNumber: 1,
         currentPlayer: 1,
         startingPlayer: 1,
-        activePlayers: 5,
+        activePlayers: 2,
         player1: "Player1",
         player2: "Player2",
         player3: "Player3",
@@ -17,12 +21,13 @@ $(document).ready(function() {
         player5: "Player5",
     }
 
-    $('#setupGameModal').toggle();
+    $('#setupGameModal').modal('show');
 
     function setupGame() {
         getAndSetPlayerNames();
         hideInactivePlayers();
         setStartingPlayer();
+        $('#setupGameModal').modal('hide');
     }
 
     function getAndSetPlayerNames() {
@@ -104,6 +109,7 @@ $(document).ready(function() {
 
     $(".clicky").click(function(){
         let myTarget="#"+$(this).attr("myTargetValue")+game.currentPlayer;
+        let typeOfThingToChangeAsText = $(this).attr('myTargetvalue');
         let myValue =$(myTarget).text();
         if ($(this).attr("math") === "plus") {
             myValue++
@@ -111,6 +117,12 @@ $(document).ready(function() {
         else {
             myValue--
         }
+
+        if (myValue < 0 && typeOfThingToChangeAsText != "moneyPerRound") {
+            callErrorModal(`You don't have enough of the target for that action.`);
+            return false;
+        }
+
         $(myTarget).text(myValue);
         // TODO some sort of logging here
     });
@@ -122,13 +134,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "oxygenTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 14){
-                    console.log(`Unable to raise Oxygen - we are at max.`);
+                    callErrorModal(`Unable to raise Oxygen - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= 0){
-                    console.log(`Unable to lower Oxygen - we are at min.`);
+                    callErrorModal(`Unable to lower Oxygen - we are at min.`);
                     return false;
                 }
             }
@@ -137,13 +149,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "tempTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 8){
-                    console.log(`Unable to raise temp - we are at max.`);
+                    callErrorModal(`Unable to raise temp - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= -30){
-                    console.log(`Unable to lower temp - we are at min.`);
+                    callErrorModal(`Unable to lower temp - we are at min.`);
                     return false;
                 }
             }
@@ -152,13 +164,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "waterTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 9){
-                    console.log(`Unable to raise water - we are at max.`);
+                    callErrorModal(`Unable to raise water - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= 0){
-                    console.log(`Unable to lower water - we are at min.`);
+                    callErrorModal(`Unable to lower water - we are at min.`);
                     return false;
                 }
             }
@@ -167,13 +179,13 @@ $(document).ready(function() {
         if ($(this).attr("myTargetValue") === "venusTotal"){
             if ($(this).attr("math") === "plus"){
                 if(myValue >= 30){
-                    console.log(`Unable to raise Venus - we are at max.`);
+                    callErrorModal(`Unable to raise Venus - we are at max.`);
                     return false;
                 }
             }
             if ($(this).attr("math") === "minus"){
                 if(myValue <= 0){
-                    console.log(`Unable to lower Venus - we are at min.`);
+                    callErrorModal(`Unable to lower Venus - we are at min.`);
                     return false;
                 }
             }
@@ -202,24 +214,164 @@ $(document).ready(function() {
     });
 
     $('#nextRound').click(function(){
-        // TODO bring up a modal to prompt for 'are you sure?'
-        $('#nextRoundModal').toggle();
+        $('#nextRoundModal').modal('show');
     });
 
     $('#confirmNextRound').click(function(){
-        $('#nextRoundModal').toggle();
+        $('#nextRoundModal').modal('hide');
         setupNextRound();
     });
 
     $('#notYetNextRound').click(function(){
-        $('#nextRoundModal').toggle();
+        $('#nextRoundModal').modal('hide');
     });
 
     $('#confirmSetup').click(function(){
-        $('#setupGameModal').toggle();
         setupGame();
-    })
+    });
 
+    function callErrorModal(thisError){
+        $('#errorDiv').text(thisError);
+        $('#errorModal').modal('show');
+    }
+
+    $('#closeErrorModal').click(function(){
+        $('#errorModal').modal('hide');
+    });
+
+    $('#buyCard').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 3) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 3);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy another card.`);
+            return false;
+        }
+    });
+
+    $('#buyGreeneryWithPlants').click(function(){
+        let plantsCurrentlyAvailable = parseInt($('#plantsTotal'+game.currentPlayer).text());
+        let currentOxygen = parseInt($('#oxygenTotal').text());
+        if (currentOxygen < 14) {
+            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+            $('#oxygenTotal').text(currentOxygen + 1);
+        }
+        else {
+            console.log(`Oxygen was not raised as it is at max.`);
+        }
+
+        // In either case, we still let them buy it (if they can afford it)
+        if (plantsCurrentlyAvailable >= 8) {
+            $('#plantsTotal'+game.currentPlayer).text(plantsCurrentlyAvailable - 8);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough plants to buy a greenery.`);
+            return false;
+        }
+    });
+    
+    $('#buyGreeneryWithMoney').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        let currentOxygen = parseInt($('#oxygenTotal').text());
+        if (currentOxygen < 14) {
+            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+            $('#oxygenTotal').text(currentOxygen + 1);
+        }
+        else {
+            console.log(`Oxygen was not raised as it is at max.`);
+        }
+
+        // In either case, we still let them buy it (if they can afford it)
+        if (moneyCurrentlyAvailable >= 23) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 23);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a greenery.`);
+            return false;
+        }
+    
+    });
+    
+    $('#buyAquafer').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        let currentAquafers = parseInt($('#waterTotal').text())
+        if (currentAquafers < 9) {
+            if (moneyCurrentlyAvailable >= 18) {
+                $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 18);
+                let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#waterTotal').text(currentAquafers + 1);
+                // TODO logging here.
+            }
+            else {
+                callErrorModal(`You don't have enough money to buy an aquafer.`);
+                return false;
+            }
+        }
+        else {
+            callErrorModal(`There are no aquafers available for purchase.`);
+        }
+    
+    });
+    
+    $('#buyPowerPlant').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 11) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 11);
+            let currentEnergyPerRound = parseInt($('#energyPerRound'+game.currentPlayer).text());
+            $('#energyPerRound'+game.currentPlayer).text(currentEnergyPerRound + 1);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a power plant.`);
+            return false;
+        }
+    
+    });
+    
+    $('#buyCity').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        if (moneyCurrentlyAvailable >= 25) {
+            $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 25);
+            let currentMoneyPerRound = parseInt($('#moneyPerRound'+game.currentPlayer).text());
+            $('#moneyPerRound'+game.currentPlayer).text(currentMoneyPerRound + 1);
+            // TODO logging here.
+        }
+        else {
+            callErrorModal(`You don't have enough money to buy a city.`);
+            return false;
+        }
+
+    });
+    
+    $('#buyMeteor').click(function(){
+        let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        let currentTemp = parseInt($('#tempTotal').text());
+        if (currentTemp < 8) {
+            if (moneyCurrentlyAvailable >= 14) {
+                $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 14);
+                let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#tempTotal').text(currentTemp + 2);
+                // TODO logging here.
+            }
+            else {
+                callErrorModal(`You don't have enough money to buy a meteor.`);
+                return false;
+            }
+        }
+        else {
+            callErrorModal(`The temperature can no longer be raised.`);
+        }
+
+    });
+    
     function setupNextRound() {
         // 1. raise the round number
         game.roundNumber++;
@@ -275,6 +427,62 @@ $(document).ready(function() {
             $('#heatTotal'+i).text(heatCurrentlyAvailable + heatPerRound)
         }
     }
+
+    $('#bigSwingForm').submit(function(){
+        event.preventDefault();
+        // We need to grab the type of thing we are manipulating and the amount and the player - then do the math.
+        let typeOfThingToChange = $('#bigSwingDropDown').find(":selected").val();
+        let typeOfThingToChangeAsText = $('#bigSwingDropDown').find(":selected").text().toLowerCase();
+        let valueOfThingToChangeAsText = $('#bigSwingInput').val();
+        let valueOfThingToChange = parseInt($('#bigSwingInput').val());
+        let currentValueOfThingToChange = parseInt($('#'+typeOfThingToChange+game.currentPlayer).text());
+
+        if (valueOfThingToChangeAsText === "" || valueOfThingToChange > 100 || valueOfThingToChange < -100){
+            console.log(`Value to change is in a bad range - fix it before submission`);
+            callErrorModal('Please enter a value in the input box to continue...');
+            return false;
+        }
+
+        if ((currentValueOfThingToChange + valueOfThingToChange) < 0) {
+            callErrorModal(`You don't have enough ${typeOfThingToChangeAsText} for that action.`);
+        }
+        else {
+            $('#'+typeOfThingToChange+game.currentPlayer).text(currentValueOfThingToChange + valueOfThingToChange);
+            $('#bigSwingInput').val('');
+        }
+    });
+
+    // These remove the precision needed to click a different player
+    // You can click any of the player stats and you're good to go.  
+    $('.player1').click(function(){
+        $('#player1Radio').prop("checked", true);
+        game.currentPlayer = 1;
+        updateCurrentPlayer();
+    });
+
+    $('.player2').click(function(){
+        $('#player2Radio').prop("checked", true);
+        game.currentPlayer = 2;
+        updateCurrentPlayer();
+    });
+
+    $('.player3').click(function(){
+        $('#player3Radio').prop("checked", true);
+        game.currentPlayer = 3;
+        updateCurrentPlayer();
+    });
+
+    $('.player4').click(function(){
+        $('#player4Radio').prop("checked", true);
+        game.currentPlayer = 4;
+        updateCurrentPlayer();
+    });
+
+    $('.player5').click(function(){
+        $('#player5Radio').prop("checked", true);
+        game.currentPlayer = 5;
+        updateCurrentPlayer();
+    });
     
 
 }); // End document.ready
