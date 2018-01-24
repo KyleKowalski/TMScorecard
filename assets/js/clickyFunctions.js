@@ -14,7 +14,7 @@ $(document).ready(function() {
     // 5. CSS - more like the colors of the board
 
 
-    // Enable navigation prompt
+    // This will propt if the user tries to close/refresh the screen (since the entire app is not databased and just memory based)
     window.onbeforeunload = function() {
         return true;
     };
@@ -119,6 +119,7 @@ $(document).ready(function() {
 
     $(".clicky").click(function(){
         let myTarget="#"+$(this).attr("myTargetValue")+game.currentPlayer;
+        let typeOfThingToChangeAsText = $(this).attr('myTargetvalue');
         let myValue =$(myTarget).text();
         if ($(this).attr("math") === "plus") {
             myValue++
@@ -126,6 +127,12 @@ $(document).ready(function() {
         else {
             myValue--
         }
+
+        if (myValue < 0 && typeOfThingToChangeAsText != "moneyPerRound") {
+            callErrorModal(`You don't have enough of the target for that action.`);
+            return false;
+        }
+
         $(myTarget).text(myValue);
         // TODO some sort of logging here
     });
@@ -217,22 +224,30 @@ $(document).ready(function() {
     });
 
     $('#nextRound').click(function(){
-        // TODO bring up a modal to prompt for 'are you sure?'
-        $('#nextRoundModal').toggle();
+        $('#nextRoundModal').modal('show');
     });
 
     $('#confirmNextRound').click(function(){
-        $('#nextRoundModal').toggle();
+        $('#nextRoundModal').modal('hide');
         setupNextRound();
     });
 
     $('#notYetNextRound').click(function(){
-        $('#nextRoundModal').toggle();
+        $('#nextRoundModal').modal('hide');
     });
 
     $('#confirmSetup').click(function(){
         setupGame();
-    })
+    });
+
+    function callErrorModal(thisError){
+        $('#errorDiv').text(thisError);
+        $('#errorModal').modal('show');
+    }
+
+    $('#closeErrorModal').click(function(){
+        $('#errorModal').modal('hide');
+    });
 
     function setupNextRound() {
         // 1. raise the round number
@@ -294,19 +309,24 @@ $(document).ready(function() {
         event.preventDefault();
         // We need to grab the type of thing we are manipulating and the amount and the player - then do the math.
         let typeOfThingToChange = $('#bigSwingDropDown').find(":selected").val();
-        let valueOfThingToChange = $('#bigSwingInput').val();
+        let typeOfThingToChangeAsText = $('#bigSwingDropDown').find(":selected").text().toLowerCase();
+        let valueOfThingToChangeAsText = $('#bigSwingInput').val();
+        let valueOfThingToChange = parseInt($('#bigSwingInput').val());
         let currentValueOfThingToChange = parseInt($('#'+typeOfThingToChange+game.currentPlayer).text());
 
-        if (valueOfThingToChange === '' || valueOfThingToChange > 100 || valueOfThingToChange < -100){
+        if (valueOfThingToChangeAsText === "" || valueOfThingToChange > 100 || valueOfThingToChange < -100){
             console.log(`Value to change is in a bad range - fix it before submission`);
-            // TODO error to user here.
+            callErrorModal('Please enter a value in the input box to continue...');
             return false;
         }
 
-        console.log(`We are changing: ${typeOfThingToChange} for player: ${game.currentPlayer} changed by '${valueOfThingToChange}' staring at: ${currentValueOfThingToChange}`);
-
-        
-
+        if ((currentValueOfThingToChange + valueOfThingToChange) < 0) {
+            callErrorModal(`You don't have enough ${typeOfThingToChangeAsText} for that action.`);
+        }
+        else {
+            $('#'+typeOfThingToChange+game.currentPlayer).text(currentValueOfThingToChange + valueOfThingToChange);
+            $('#bigSwingInput').val('');
+        }
     });
     
 

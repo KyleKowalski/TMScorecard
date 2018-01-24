@@ -1,5 +1,6 @@
 wrapper {
     padding: 25px;
+    font-size:125%;
 }
 
 table {
@@ -19,8 +20,8 @@ tr:nth-child(odd) {
     background-color: lightgray;
 }
 
-tr:nth-child(even) {
-    /* border: 1px solid rgba(0,255,0,1); */
+#errorDiv {
+    color: red;
 }
 
 .currentPlayer {
