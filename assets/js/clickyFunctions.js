@@ -253,6 +253,17 @@ $(document).ready(function() {
 
     $('#buyGreeneryWithPlants').click(function(){
         let plantsCurrentlyAvailable = parseInt($('#plantsTotal'+game.currentPlayer).text());
+        let currentOxygen = parseInt($('#oxygenTotal').text());
+        if (currentOxygen < 14) {
+            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+            $('#oxygenTotal').text(currentOxygen + 1);
+        }
+        else {
+            console.log(`Oxygen was not raised as it is at max.`);
+        }
+
+        // In either case, we still let them buy it (if they can afford it)
         if (plantsCurrentlyAvailable >= 8) {
             $('#plantsTotal'+game.currentPlayer).text(plantsCurrentlyAvailable - 8);
             // TODO logging here.
@@ -265,6 +276,17 @@ $(document).ready(function() {
     
     $('#buyGreeneryWithMoney').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
+        let currentOxygen = parseInt($('#oxygenTotal').text());
+        if (currentOxygen < 14) {
+            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+            $('#oxygenTotal').text(currentOxygen + 1);
+        }
+        else {
+            console.log(`Oxygen was not raised as it is at max.`);
+        }
+
+        // In either case, we still let them buy it (if they can afford it)
         if (moneyCurrentlyAvailable >= 23) {
             $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 23);
             // TODO logging here.
