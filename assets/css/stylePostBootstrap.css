@@ -9,9 +9,9 @@ wrapper {
 }
 
 table {
-    border: 1px solid black;
     margin-bottom: 15px;
     margin-top: 10px;
+    z-index: 10;
 }
 
 th {
@@ -24,58 +24,72 @@ th, tr, td {
 
 tr:nth-child(1) {
     background-color: rgba(255,100,0,1);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(2) {
     background-color: rgba(255,200,0,1);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(3) {
     background-color: rgb(255, 150, 0);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(4) {
     background-color: rgb(165, 100, 42);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(5) {
     background-color: rgb(165, 75, 42);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(6) {
     background-color: rgb(211, 211, 211);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(7) {
     background-color: rgb(128, 128, 128);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(8) {
     background-color: rgb(144, 238, 144);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(9) {
-    background-color: rgb(0, 128, 0);
+    background-color: rgb(45, 179, 45);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(10) {
     background-color: rgb(221, 160, 221);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(11) {
     background-color: rgb(221, 120, 221);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(12) {
     background-color: rgb(255, 50, 50);
+    border-bottom: 3px solid white;
 }
 
 tr:nth-child(13) {
     background-color: rgb(200, 100, 50);
+    border-bottom: 3px solid white;
 }
 
 .buttonsForCSS {
-    background-color: rgb(11, 20, 63);
+    background-color: rgb(4, 30, 161);
+    border-bottom: 3px solid white;
 }
 
 #errorDiv {
@@ -85,6 +99,7 @@ tr:nth-child(13) {
 .currentPlayer {
     border: 2px solid black;
     font-size: 200%;
+    z-index:100;
 }
 
 .form-control {
