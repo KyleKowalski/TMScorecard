@@ -24,10 +24,23 @@ $(document).ready(function() {
     $('#setupGameModal').modal('show');
 
     function setupGame() {
+        resetGame();
         getAndSetPlayerNames();
         hideInactivePlayers();
         setStartingPlayer();
         $('#setupGameModal').modal('hide');
+    }
+
+    function resetGame() {
+        game.roundNumber = 1;
+        game.currentPlayer = 1;
+        game.startingPlayer = 1;
+        game.activePlayers = 2;
+        game.player1 = "Player1";
+        game.player2 = "Player2";
+        game.player3 = "Player3";
+        game.player4 = "Player4";
+        game.player5 = "Player5";
     }
 
     function getAndSetPlayerNames() {
@@ -237,6 +250,24 @@ $(document).ready(function() {
 
     $('#closeErrorModal').click(function(){
         $('#errorModal').modal('hide');
+    });
+
+    $('#switchPositiveAndNegative').click(function(){
+        event.preventDefault();
+        let targetVal = parseInt($('#bigSwingInput').val());
+        console.log(targetVal);
+        if (targetVal > 0) {
+            console.log(`making it negative`);
+            $('#bigSwingInput').val(-targetVal);
+        }
+        if (targetVal < 0) {
+            console.log(`making it positive`);
+            $('#bigSwingInput').val(Math.abs(targetVal));
+        }
+        else {
+            console.log(`it was zero or empty - so - no`);
+            return false;
+        }
     });
 
     $('#buyCard').click(function(){
