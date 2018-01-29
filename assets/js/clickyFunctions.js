@@ -259,16 +259,44 @@ $(document).ready(function() {
         if (targetVal > 0) {
             console.log(`making it negative`);
             $('#bigSwingInput').val(-targetVal);
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').addClass('backgroundRed');
         }
-        if (targetVal < 0) {
+        else if (targetVal < 0) {
             console.log(`making it positive`);
             $('#bigSwingInput').val(Math.abs(targetVal));
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').addClass('backgroundGreen');
         }
         else {
             console.log(`it was zero or empty - so - no`);
             return false;
         }
     });
+
+    $('#bigSwingInput').change(function(){
+        let targetVal = parseInt($('#bigSwingInput').val());
+        console.log(targetVal);
+        if (targetVal > 0) {
+            console.log(`making it green`);
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').removeClass('backgroundBlue');
+            $('#bigSwingInput').addClass('backgroundGreen');
+        }
+        else if (targetVal < 0) {
+            console.log(`making it red`);
+            $('#bigSwingInput').removeClass('backgroundBlue');
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').addClass('backgroundRed');
+        }
+        else {
+            console.log(`making it blue`);
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').addClass('backgroundBlue');
+            return false;
+        }
+    })
 
     $('#buyCard').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
@@ -381,7 +409,7 @@ $(document).ready(function() {
 
     });
     
-    $('#buyMeteor').click(function(){
+    $('#buyAsteroidWithMoney').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
         let currentTemp = parseInt($('#tempTotal').text());
         if (currentTemp < 8) {
@@ -393,15 +421,36 @@ $(document).ready(function() {
                 // TODO logging here.
             }
             else {
-                callErrorModal(`You don't have enough money to buy a meteor.`);
+                callErrorModal(`You don't have enough money to buy an asteroid.`);
                 return false;
             }
         }
         else {
             callErrorModal(`The temperature can no longer be raised.`);
         }
-
     });
+
+    $('#buyAsteroidWithHeat').click(function(){
+        let heatCurrentlyAvailable = parseInt($('#heatTotal'+game.currentPlayer).text());
+        let currentTemp = parseInt($('#tempTotal').text());
+        if (currentTemp < 8) {
+            if (heatCurrentlyAvailable >= 8) {
+                $('#moneyTotal'+game.currentPlayer).text(heatCurrentlyAvailable - 8);
+                let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#tempTotal').text(currentTemp + 2);
+                // TODO logging here.
+            }
+            else {
+                callErrorModal(`You don't have enough heat to buy an asteroid.`);
+                return false;
+            }
+        }
+        else {
+            callErrorModal(`The temperature can no longer be raised.`);
+        }
+    });
+
     
     function setupNextRound() {
         // 1. raise the round number
@@ -480,6 +529,9 @@ $(document).ready(function() {
         else {
             $('#'+typeOfThingToChange+game.currentPlayer).text(currentValueOfThingToChange + valueOfThingToChange);
             $('#bigSwingInput').val('');
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').addClass('backgroundBlue');
         }
     });
 

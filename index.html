@@ -84,25 +84,23 @@
                         <option value="energyTotal">Energy</option>
                         <option value="heatTotal">Heat</option>
                     </select>
-                    <input id="bigSwingInput" type="number" min="-100" max="100" placeholder="Enter the value to add/remove..." class="form-control">
+                    <input id="bigSwingInput" type="number" min="-100" max="100" placeholder="Enter the value to add/remove..." class="form-control backgroundBlue">
                     <button id="switchPositiveAndNegative" class="form-control">+/-</button>
                     <input type="submit" class="form-control btn btn-primary">
                 </form>
             </div>
             <div class="col-sm-4 col-xs-6">
                 <div id="buyCard" class="btn btn-info form-control" title="Remove 3 money to purchase a card">Buy a card </div>
-                <div class="col-xs-12">
-                    <div class="col-xs-8 align-middle">Buy a shrubbery</div>
-                    <div id="buyGreeneryWithPlants" class="col-xs-2 btn btn-success" title="Remove 8 plants to purchase a forest/greenery, increase oxygen by 1 (if possible), and add 1 Terraforming Point (if possible)">(p)</div>
-                    <div id="buyGreeneryWithMoney" class="col-xs-2 btn btn-success" title="Remove 23 money to purchase a forest/greenery, increase oxygen by 1 (if possible), and add 1 Terraforming Point (if possible)">($)</div>
-                </div>
+                <div id="buyGreeneryWithPlants" class="col-xs-2 btn btn-success form-control" title="Remove 8 plants to purchase a forest/greenery, increase oxygen by 1 (if possible), and add 1 Terraforming Point (if possible)">Buy a greenery (plants)</div>
+                <div id="buyGreeneryWithMoney" class="col-xs-2 btn btn-success form-control" title="Remove 23 money to purchase a forest/greenery, increase oxygen by 1 (if possible), and add 1 Terraforming Point (if possible)">Buy a greenery ($)</div>
                 <div id="buyAquafer" class="btn btn-primary form-control" title="Remove 18 money to purchase an aquafer and add 1 Terraforming Point">Buy an aquafer</div>
             </div>
             <div class="col-sm-4 col-xs-6">
                     <div id="buyPowerPlant" class="btn btn-warning form-control" title="Remove 11 money and get one power per turn">Buy a power plant</div>
+                    <div id="buyAsteroidWithHeat" class="btn btn-danger form-control" title="Remove 8 heat and raise the temperature 1 heat">Buy temperature (heat)</div>
+                    <div id="buyAsteroidWithMoney" class="btn btn-danger form-control" title="Remove 14 money and raise the temperature 1 heat">Buy temperature ($)</div>
                     <div id="buyCity" class="btn btn-default form-control" title="Remove 25 money, place a city, and get 1 gold per turn">Buy a city</div>
-                    <div id="buyMeteor" class="btn btn-danger form-control" title="Remove 14 money and raise the temperature 1 heat">Buy a meteor (temp)</div>
-            </div>
+                </div>
         </div>
     </section>
 
