@@ -13,7 +13,7 @@ $(document).ready(function() {
         roundNumber: 1,
         currentPlayer: 1,
         startingPlayer: 1,
-        activePlayers: 2,
+        // activePlayers: 2,
         player1: "Player1",
         player2: "Player2",
         player3: "Player3",
@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('#setupGameModal').modal('show');
 
     function setupGame() {
-        resetGame();
+        // resetGame();
         getAndSetPlayerNames();
         hideInactivePlayers();
         setStartingPlayer();
@@ -118,12 +118,22 @@ $(document).ready(function() {
         $('#player5Id').removeClass('startingPlayer');
 
         $('#player'+[game.startingPlayer]+'Id').addClass('startingPlayer');
+
+        $('#startingPlayer1').attr('hidden', true);
+        $('#startingPlayer2').attr('hidden', true);
+        $('#startingPlayer3').attr('hidden', true);
+        $('#startingPlayer4').attr('hidden', true);
+        $('#startingPlayer5').attr('hidden', true);
+
+        $('#startingPlayer'+[game.startingPlayer]).removeAttr('hidden');
     };
 
     $(".clicky").click(function(){
         let myTarget="#"+$(this).attr("myTargetValue")+game.currentPlayer;
         let typeOfThingToChangeAsText = $(this).attr('myTargetvalue');
         let myValue =$(myTarget).text();
+
+        // console.log(`mytarget: '${myTarget}' - typeOfThing: '${typeOfThingToChangeAsText}' - myvalue: '${myValue}'`);
         if ($(this).attr("math") === "plus") {
             myValue++
         }
@@ -259,16 +269,44 @@ $(document).ready(function() {
         if (targetVal > 0) {
             console.log(`making it negative`);
             $('#bigSwingInput').val(-targetVal);
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').addClass('backgroundRed');
         }
-        if (targetVal < 0) {
+        else if (targetVal < 0) {
             console.log(`making it positive`);
             $('#bigSwingInput').val(Math.abs(targetVal));
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').addClass('backgroundGreen');
         }
         else {
             console.log(`it was zero or empty - so - no`);
             return false;
         }
     });
+
+    $('#bigSwingInput').change(function(){
+        let targetVal = parseInt($('#bigSwingInput').val());
+        console.log(targetVal);
+        if (targetVal > 0) {
+            console.log(`making it green`);
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').removeClass('backgroundBlue');
+            $('#bigSwingInput').addClass('backgroundGreen');
+        }
+        else if (targetVal < 0) {
+            console.log(`making it red`);
+            $('#bigSwingInput').removeClass('backgroundBlue');
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').addClass('backgroundRed');
+        }
+        else {
+            console.log(`making it blue`);
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').addClass('backgroundBlue');
+            return false;
+        }
+    })
 
     $('#buyCard').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
@@ -381,7 +419,7 @@ $(document).ready(function() {
 
     });
     
-    $('#buyMeteor').click(function(){
+    $('#buyAsteroidWithMoney').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
         let currentTemp = parseInt($('#tempTotal').text());
         if (currentTemp < 8) {
@@ -393,15 +431,36 @@ $(document).ready(function() {
                 // TODO logging here.
             }
             else {
-                callErrorModal(`You don't have enough money to buy a meteor.`);
+                callErrorModal(`You don't have enough money to buy an asteroid.`);
                 return false;
             }
         }
         else {
             callErrorModal(`The temperature can no longer be raised.`);
         }
-
     });
+
+    $('#buyAsteroidWithHeat').click(function(){
+        let heatCurrentlyAvailable = parseInt($('#heatTotal'+game.currentPlayer).text());
+        let currentTemp = parseInt($('#tempTotal').text());
+        if (currentTemp < 8) {
+            if (heatCurrentlyAvailable >= 8) {
+                $('#moneyTotal'+game.currentPlayer).text(heatCurrentlyAvailable - 8);
+                let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#tempTotal').text(currentTemp + 2);
+                // TODO logging here.
+            }
+            else {
+                callErrorModal(`You don't have enough heat to buy an asteroid.`);
+                return false;
+            }
+        }
+        else {
+            callErrorModal(`The temperature can no longer be raised.`);
+        }
+    });
+
     
     function setupNextRound() {
         // 1. raise the round number
@@ -425,37 +484,37 @@ $(document).ready(function() {
             let terraformRating = parseInt($('#trTotal'+i).text());
             let moneyPerRound = parseInt($('#moneyPerRound'+i).text());
 
-            $('#moneyTotal'+i).text(moneyCurrentlyAvailable + terraformRating + moneyPerRound)
+            $('#moneyTotal'+i).text(moneyCurrentlyAvailable + terraformRating + moneyPerRound);
             
             // 3b. Steel
             let steelCurrentlyAvailable = parseInt($('#steelTotal'+i).text());
             let steelPerRound = parseInt($('#steelPerRound'+i).text());
 
-            $('#steelTotal'+i).text(steelCurrentlyAvailable + steelPerRound)
+            $('#steelTotal'+i).text(steelCurrentlyAvailable + steelPerRound);
             
             // 3c. Titanium
             let titaniumCurrentlyAvailable = parseInt($('#titaniumTotal'+i).text());
             let titaniumPerRound = parseInt($('#titaniumPerRound'+i).text());
 
-            $('#titaniumTotal'+i).text(titaniumCurrentlyAvailable + titaniumPerRound)
+            $('#titaniumTotal'+i).text(titaniumCurrentlyAvailable + titaniumPerRound);
             
             // 3d. Plants
             let plantsCurrentlyAvailable = parseInt($('#plantsTotal'+i).text());
             let plantsPerRound = parseInt($('#plantsPerRound'+i).text());
 
-            $('#plantsTotal'+i).text(plantsCurrentlyAvailable + plantsPerRound)
+            $('#plantsTotal'+i).text(plantsCurrentlyAvailable + plantsPerRound);
             
             // 3e. Energy
             let energyCurrentlyAvailable = parseInt($('#energyTotal'+i).text());
             let energyPerRound = parseInt($('#energyPerRound'+i).text());
 
-            $('#energyTotal'+i).text(energyCurrentlyAvailable + energyPerRound)
+            $('#energyTotal'+i).text(energyPerRound); // current energy get moved to heat
             
             // 3f. Heat
             let heatCurrentlyAvailable = parseInt($('#heatTotal'+i).text());
             let heatPerRound = parseInt($('#heatPerRound'+i).text());
 
-            $('#heatTotal'+i).text(heatCurrentlyAvailable + heatPerRound)
+            $('#heatTotal'+i).text(energyCurrentlyAvailable + heatCurrentlyAvailable + heatPerRound); // current energy becomes heat 
         }
     }
 
@@ -480,6 +539,9 @@ $(document).ready(function() {
         else {
             $('#'+typeOfThingToChange+game.currentPlayer).text(currentValueOfThingToChange + valueOfThingToChange);
             $('#bigSwingInput').val('');
+            $('#bigSwingInput').removeClass('backgroundGreen');
+            $('#bigSwingInput').removeClass('backgroundRed');
+            $('#bigSwingInput').addClass('backgroundBlue');
         }
     });
 
