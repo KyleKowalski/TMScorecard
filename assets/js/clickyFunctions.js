@@ -13,7 +13,7 @@ $(document).ready(function() {
         roundNumber: 1,
         currentPlayer: 1,
         startingPlayer: 1,
-        // activePlayers: 2,
+        activePlayers: 2,
         player1: "Player1",
         player2: "Player2",
         player3: "Player3",
@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('#setupGameModal').modal('show');
 
     function setupGame() {
-        // resetGame();
+        resetGame();
         getAndSetPlayerNames();
         hideInactivePlayers();
         setStartingPlayer();
@@ -35,7 +35,7 @@ $(document).ready(function() {
         game.roundNumber = 1;
         game.currentPlayer = 1;
         game.startingPlayer = 1;
-        game.activePlayers = 2;
+        // game.activePlayers = 2;
         game.player1 = "Player1";
         game.player2 = "Player2";
         game.player3 = "Player3";
