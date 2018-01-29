@@ -124,6 +124,8 @@ $(document).ready(function() {
         let myTarget="#"+$(this).attr("myTargetValue")+game.currentPlayer;
         let typeOfThingToChangeAsText = $(this).attr('myTargetvalue');
         let myValue =$(myTarget).text();
+
+        // console.log(`mytarget: '${myTarget}' - typeOfThing: '${typeOfThingToChangeAsText}' - myvalue: '${myValue}'`);
         if ($(this).attr("math") === "plus") {
             myValue++
         }
@@ -474,37 +476,37 @@ $(document).ready(function() {
             let terraformRating = parseInt($('#trTotal'+i).text());
             let moneyPerRound = parseInt($('#moneyPerRound'+i).text());
 
-            $('#moneyTotal'+i).text(moneyCurrentlyAvailable + terraformRating + moneyPerRound)
+            $('#moneyTotal'+i).text(moneyCurrentlyAvailable + terraformRating + moneyPerRound);
             
             // 3b. Steel
             let steelCurrentlyAvailable = parseInt($('#steelTotal'+i).text());
             let steelPerRound = parseInt($('#steelPerRound'+i).text());
 
-            $('#steelTotal'+i).text(steelCurrentlyAvailable + steelPerRound)
+            $('#steelTotal'+i).text(steelCurrentlyAvailable + steelPerRound);
             
             // 3c. Titanium
             let titaniumCurrentlyAvailable = parseInt($('#titaniumTotal'+i).text());
             let titaniumPerRound = parseInt($('#titaniumPerRound'+i).text());
 
-            $('#titaniumTotal'+i).text(titaniumCurrentlyAvailable + titaniumPerRound)
+            $('#titaniumTotal'+i).text(titaniumCurrentlyAvailable + titaniumPerRound);
             
             // 3d. Plants
             let plantsCurrentlyAvailable = parseInt($('#plantsTotal'+i).text());
             let plantsPerRound = parseInt($('#plantsPerRound'+i).text());
 
-            $('#plantsTotal'+i).text(plantsCurrentlyAvailable + plantsPerRound)
+            $('#plantsTotal'+i).text(plantsCurrentlyAvailable + plantsPerRound);
             
             // 3e. Energy
             let energyCurrentlyAvailable = parseInt($('#energyTotal'+i).text());
             let energyPerRound = parseInt($('#energyPerRound'+i).text());
 
-            $('#energyTotal'+i).text(energyCurrentlyAvailable + energyPerRound)
+            $('#energyTotal'+i).text(energyPerRound); // current energy get moved to heat
             
             // 3f. Heat
             let heatCurrentlyAvailable = parseInt($('#heatTotal'+i).text());
             let heatPerRound = parseInt($('#heatPerRound'+i).text());
 
-            $('#heatTotal'+i).text(heatCurrentlyAvailable + heatPerRound)
+            $('#heatTotal'+i).text(energyCurrentlyAvailable + heatCurrentlyAvailable + heatPerRound); // current energy becomes heat 
         }
     }
 
