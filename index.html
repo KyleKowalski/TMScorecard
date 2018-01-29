@@ -283,18 +283,38 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Current Quantity:</th>
-                    <th id="player1Id" class="userName player1 currentPlayer"><input id="player1Radio" type="radio" name="playerRadioButton" value="1" checked="checked"><div id="player1Label" class="pull-left"></div><br></th>
-                    <th id="player2Id" class="userName player2"><input id="player2Radio" type="radio" name="playerRadioButton" value="2"><div id="player2Label" class="pull-left"></div><br></th>
-                    <th id="player3Id" class="userName player3"><input id="player3Radio" type="radio" name="playerRadioButton" value="3"><div id="player3Label" class="pull-left"></div><br></th>
-                    <th id="player4Id" class="userName player4"><input id="player4Radio" type="radio" name="playerRadioButton" value="4"><div id="player4Label" class="pull-left"></div><br></th>
-                    <th id="player5Id" class="userName player5"><input id="player5Radio" type="radio" name="playerRadioButton" value="5"><div id="player5Label" class="pull-left"></div><br></th>
-                    <th class="perRound">Per Round:</th>
+                    <th class="text-center">Current<br>Quantity:</th>
+                    <th id="player1Id" class="userName player1 currentPlayer">
+                        <input id="player1Radio" type="radio" name="playerRadioButton" value="1" checked="checked">
+                        <div id="player1Label" class="pull-left"></div>
+                        <div id="startingPlayer1" class="tinyWriting pull-right">Starting<br>Player</div>
+                    </th>
+                    <th id="player2Id" class="userName player2">
+                        <input id="player2Radio" type="radio" name="playerRadioButton" value="2">
+                        <div id="player2Label" class="pull-left"></div>
+                        <div id="startingPlayer2" class="tinyWriting pull-right" hidden>Starting<br>Player</div>
+                    </th>
+                    <th id="player3Id" class="userName player3">
+                        <input id="player3Radio" type="radio" name="playerRadioButton" value="3">
+                        <div id="player3Label" class="pull-left"></div>
+                        <div id="startingPlayer3" class="tinyWriting pull-right" hidden>Starting<br>Player</div>
+                    </th>
+                    <th id="player4Id" class="userName player4">
+                        <input id="player4Radio" type="radio" name="playerRadioButton" value="4">
+                        <div id="player4Label" class="pull-left"></div>
+                        <div id="startingPlayer4" class="tinyWriting pull-right" hidden>Starting<br>Player</div>
+                    </th>
+                    <th id="player5Id" class="userName player5">
+                        <input id="player5Radio" type="radio" name="playerRadioButton" value="5">
+                        <div id="player5Label" class="pull-left"></div>
+                        <div id="startingPlayer5" class="tinyWriting pull-right" hidden>Starting<br>Player</div>
+                    </th>
+                    <th class="perRound text-center">Per<br>Round:</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Terraform Rating:</td>
+                    <td class="text-center">Terraform<br>Rating:</td>
                     <td>
                         <button class="clicky btn btn-success" math="plus" myTargetValue="trTotal">+</button>
                         <button class="clicky btn btn-danger" math="minus" myTargetValue="trTotal">-</button>
@@ -304,7 +324,7 @@
                     <td class="player3" id="trTotal3">20</td>
                     <td class="player4" id="trTotal4">20</td>
                     <td class="player5" id="trTotal5">20</td>
-                    <td></td>
+                    <td class="perRound"></td>
                 </tr>
                 <tr>
                     <td>Money:</td>

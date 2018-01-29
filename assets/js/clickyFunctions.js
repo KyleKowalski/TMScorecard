@@ -13,7 +13,7 @@ $(document).ready(function() {
         roundNumber: 1,
         currentPlayer: 1,
         startingPlayer: 1,
-        activePlayers: 2,
+        // activePlayers: 2,
         player1: "Player1",
         player2: "Player2",
         player3: "Player3",
@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('#setupGameModal').modal('show');
 
     function setupGame() {
-        resetGame();
+        // resetGame();
         getAndSetPlayerNames();
         hideInactivePlayers();
         setStartingPlayer();
@@ -118,6 +118,14 @@ $(document).ready(function() {
         $('#player5Id').removeClass('startingPlayer');
 
         $('#player'+[game.startingPlayer]+'Id').addClass('startingPlayer');
+
+        $('#startingPlayer1').attr('hidden', true);
+        $('#startingPlayer2').attr('hidden', true);
+        $('#startingPlayer3').attr('hidden', true);
+        $('#startingPlayer4').attr('hidden', true);
+        $('#startingPlayer5').attr('hidden', true);
+
+        $('#startingPlayer'+[game.startingPlayer]).removeAttr('hidden');
     };
 
     $(".clicky").click(function(){

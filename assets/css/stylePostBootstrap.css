@@ -59,7 +59,8 @@ tr:nth-child(7) {
 
 
 .perRound{
-    border: 3px dashed purple;
+    border: 3px dashed rgb(109, 57, 9);
+    background-color: rgb(197, 110, 29);
 }
 
 .buttonsForCSS {
@@ -73,9 +74,13 @@ tr:nth-child(7) {
 
 .currentPlayer {
     border: 2px solid black;
-    background-color: white;
+    background-color: lightgray;
     font-size: 200%;
     z-index:100;
+}
+
+.tinyWriting {
+    font-size: 50%;
 }
 
 .backgroundRed {
