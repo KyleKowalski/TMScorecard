@@ -60,7 +60,9 @@ tr:nth-child(7) {
 
 .perRound{
     border: 3px dashed rgb(109, 57, 9);
-    background-color: rgb(197, 110, 29);
+    /* background-color: rgb(197, 110, 29); */
+    background: url('../images/hexagon.jpg') fixed; 
+    /* opacity: 0.5; */
 }
 
 .buttonsForCSS {
