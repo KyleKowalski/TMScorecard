@@ -102,6 +102,12 @@ tr:nth-child(7) {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 5px;
+}
+
+.btn {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .startingPlayer {
