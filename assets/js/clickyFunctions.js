@@ -24,6 +24,7 @@ $(document).ready(function() {
     $('#setupGameModal').modal('show');
 
     function setupGame() {
+        console.log(game);
         resetGame();
         getAndSetPlayerNames();
         hideInactivePlayers();
