@@ -446,7 +446,7 @@ $(document).ready(function() {
         let currentTemp = parseInt($('#tempTotal').text());
         if (currentTemp < 8) {
             if (heatCurrentlyAvailable >= 8) {
-                $('#tempTotal'+game.currentPlayer).text(heatCurrentlyAvailable - 8);
+                $('#heatTotal'+game.currentPlayer).text(heatCurrentlyAvailable - 8);
                 let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
                 $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
                 $('#tempTotal').text(currentTemp + 2);
