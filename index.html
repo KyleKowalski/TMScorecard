@@ -72,6 +72,7 @@
         <div class="col-sm-4 col-xs-12">
             <h3 id="roundNumber" class="text-center">Round Number: 1</h3>
             <div id="nextRound" class="btn-primary form-control text-center">Next Round</div>
+            <div id="viewLog" class="btn-default form-control text-center">View Log</div>
         </div>
         <div class="col-sm-8 col-xs-12">
             <div class="col-sm-4 col-xs-12">
@@ -350,9 +351,9 @@
         <div class="modal-content">
             <h2 class="text-center">Are you sure you want to do the next round?</h2>
             <br><br>
-            <button id="confirmNextRound" class="btn btn-success form-control">Yep, next round please!</button>
+            <button id="confirmNextRound" class="btn-success form-control">Yep, next round please!</button>
             <br><br>
-            <button id="notYetNextRound" class="btn btn-danger form-control">Noo!  Go back!</button>
+            <button id="notYetNextRound" class="btn-danger form-control">Noo!  Go back!</button>
             
         </div>
     </div>
@@ -388,17 +389,35 @@
                 <div class="pull-left">Player5:</div>
                 <input type="text" id="player5Name" class="form-control" placeholder="Enter player 5's name here...">
             </div>
-            <button id="confirmSetup" class="btn btn-success form-control">Let's get started!</button>
+            <button id="confirmSetup" class="btn-success form-control">Let's get started!</button>
         </div>
     </div>
     <div id="errorModal" class="modal">
-            <div class="modal-content">
-                <h2 class="text-center">Unable to complete your request.</h2>
-                <br><br>
-                <h2><div class="text-center" id="errorDiv">Default error should be filled in.</div></h2>
-                <br><br>
-                <button id="closeErrorModal" class="btn btn-danger form-control">Oh, ok, let's go back!</button>
-            </div>
+        <div class="modal-content">
+            <h2 class="text-center">Unable to complete your request.</h2>
+            <br><br>
+            <h2><div class="text-center" id="errorDiv">Default error should be filled in.</div></h2>
+            <br><br>
+            <button id="closeErrorModal" class="btn-danger form-control">Oh, ok, let's go back!</button>
         </div>
+    </div>
+    <div id="logModal" class="modal">
+        <div class="modal-content">
+            <h2 class="text-center">Recent Actions Taken</h2>
+            <br><br>
+            <table id="logTable" class="table">
+                <thead id="logTableHeader">
+                    <tr>
+                        <th class='width10'>Action #</th>
+                        <th class='width10'>Player</th>
+                        <th class='width60'>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="logTableBody"></tbody>
+            </table>
+            <br><br>
+            <button id="closeLogModal" class="btn-danger form-control">Done with the log, thanks!</button>
+        </div>
+    </div>
 </body>
 </html>
