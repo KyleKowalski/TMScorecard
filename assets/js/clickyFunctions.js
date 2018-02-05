@@ -1,8 +1,4 @@
 $(document).ready(function() {
-    // TODO list
-    // 4 Logging (click to view log?)
-    // 5. CSS - more like the colors of the board
-
 
     // This will propt if the user tries to close/refresh the screen (since the entire app is not databased and just memory based)
     window.onbeforeunload = function() {
@@ -19,6 +15,7 @@ $(document).ready(function() {
         player3: "Player3",
         player4: "Player4",
         player5: "Player5",
+        logActionNumber: 1,
     }
 
     $('#setupGameModal').modal('show');
@@ -36,12 +33,12 @@ $(document).ready(function() {
         game.roundNumber = 1;
         game.currentPlayer = 1;
         game.startingPlayer = 1;
-        // game.activePlayers = 2;
         game.player1 = "Player1";
         game.player2 = "Player2";
         game.player3 = "Player3";
         game.player4 = "Player4";
         game.player5 = "Player5";
+        game.logActionNumber = 1;
     }
 
     function getAndSetPlayerNames() {
@@ -148,7 +145,7 @@ $(document).ready(function() {
         }
 
         $(myTarget).text(myValue);
-        // TODO some sort of logging here
+        addLog(`Changed ${myTarget} to ${myValue}`);
     });
 
     $(".clickyTotal").click(function(){
@@ -234,7 +231,7 @@ $(document).ready(function() {
         }
         $(myTarget).text(myValue);
         $(playerTrTarget).text(playerValue);
-        // TODO some sort of logging here
+        addLog(`Changed ${myTarget} to ${myValue} (+1 TR)`);
     });
 
     $('#nextRound').click(function(){
@@ -262,6 +259,14 @@ $(document).ready(function() {
     $('#closeErrorModal').click(function(){
         $('#errorModal').modal('hide');
     });
+    
+    $('#viewLog').click(function(){
+        $('#logModal').modal('show');
+    })
+
+    $('#closeLogModal').click(function(){
+        $('#logModal').modal('hide');
+    })
 
     $('#switchPositiveAndNegative').click(function(){
         event.preventDefault();
@@ -313,7 +318,7 @@ $(document).ready(function() {
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
         if (moneyCurrentlyAvailable >= 3) {
             $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 3);
-            // TODO logging here.
+            addLog(`Bought a card (-3 money)`);
         }
         else {
             callErrorModal(`You don't have enough money to buy another card.`);
@@ -324,10 +329,10 @@ $(document).ready(function() {
     $('#buyGreeneryWithPlants').click(function(){
         let plantsCurrentlyAvailable = parseInt($('#plantsTotal'+game.currentPlayer).text());
         let currentOxygen = parseInt($('#oxygenTotal').text());
+        let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+        let addOxygen = false;
         if (currentOxygen < 14) {
-            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
-            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
-            $('#oxygenTotal').text(currentOxygen + 1);
+            addOxygen = true;
         }
         else {
             console.log(`Oxygen was not raised as it is at max.`);
@@ -336,7 +341,15 @@ $(document).ready(function() {
         // In either case, we still let them buy it (if they can afford it)
         if (plantsCurrentlyAvailable >= 8) {
             $('#plantsTotal'+game.currentPlayer).text(plantsCurrentlyAvailable - 8);
-            // TODO logging here.
+
+            if (addOxygen) {
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#oxygenTotal').text(currentOxygen + 1);
+                addLog(`Bought a greenery with plants (-8 plants) (+1 TR)`);
+            }
+            else {
+                addLog(`Bought a greenery with plants (-8 plants) (NO TR RAISE!)`);
+            }
         }
         else {
             callErrorModal(`You don't have enough plants to buy a greenery.`);
@@ -347,10 +360,10 @@ $(document).ready(function() {
     $('#buyGreeneryWithMoney').click(function(){
         let moneyCurrentlyAvailable = parseInt($('#moneyTotal'+game.currentPlayer).text());
         let currentOxygen = parseInt($('#oxygenTotal').text());
+        let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
+        let addOxygen = false;
         if (currentOxygen < 14) {
-            let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
-            $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
-            $('#oxygenTotal').text(currentOxygen + 1);
+            addOxygen = true;
         }
         else {
             console.log(`Oxygen was not raised as it is at max.`);
@@ -359,7 +372,15 @@ $(document).ready(function() {
         // In either case, we still let them buy it (if they can afford it)
         if (moneyCurrentlyAvailable >= 23) {
             $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 23);
-            // TODO logging here.
+
+            if (addOxygen) {
+                $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
+                $('#oxygenTotal').text(currentOxygen + 1);
+                addLog(`Bought a greenery with money (-23 money) (+1 TR)`);
+            }
+            else {
+                addLog('Bought a greenery with money (-23 money) (NO TR RAISE!)')
+            }
         }
         else {
             callErrorModal(`You don't have enough money to buy a greenery.`);
@@ -377,7 +398,7 @@ $(document).ready(function() {
                 let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
                 $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
                 $('#waterTotal').text(currentAquafers + 1);
-                // TODO logging here.
+                addLog(`Bought an aquafer with money (-18 money) (+1 TR)`);
             }
             else {
                 callErrorModal(`You don't have enough money to buy an aquafer.`);
@@ -396,7 +417,7 @@ $(document).ready(function() {
             $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 11);
             let currentEnergyPerRound = parseInt($('#energyPerRound'+game.currentPlayer).text());
             $('#energyPerRound'+game.currentPlayer).text(currentEnergyPerRound + 1);
-            // TODO logging here.
+            addLog(`Bought a power plant with money (-11 money)`);
         }
         else {
             callErrorModal(`You don't have enough money to buy a power plant.`);
@@ -411,7 +432,7 @@ $(document).ready(function() {
             $('#moneyTotal'+game.currentPlayer).text(moneyCurrentlyAvailable - 25);
             let currentMoneyPerRound = parseInt($('#moneyPerRound'+game.currentPlayer).text());
             $('#moneyPerRound'+game.currentPlayer).text(currentMoneyPerRound + 1);
-            // TODO logging here.
+            addLog(`Bought a city with money (-25 money) (+1 money per turn)`);
         }
         else {
             callErrorModal(`You don't have enough money to buy a city.`);
@@ -429,7 +450,7 @@ $(document).ready(function() {
                 let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
                 $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
                 $('#tempTotal').text(currentTemp + 2);
-                // TODO logging here.
+                addLog(`Bought a meteor (add heat) with money (-14 money) (+1 TR)`);
             }
             else {
                 callErrorModal(`You don't have enough money to buy an asteroid.`);
@@ -450,7 +471,7 @@ $(document).ready(function() {
                 let currentTRValue = parseInt($('#trTotal'+game.currentPlayer).text());
                 $('#trTotal'+game.currentPlayer).text(currentTRValue + 1);
                 $('#tempTotal').text(currentTemp + 2);
-                // TODO logging here.
+                addLog(`Bought a meteor (add heat) with heat (-8 heat) (+1 TR)`);
             }
             else {
                 callErrorModal(`You don't have enough heat to buy an asteroid.`);
@@ -467,6 +488,8 @@ $(document).ready(function() {
         // 1. raise the round number
         game.roundNumber++;
         $('#roundNumber').text('Round Number: '+game.roundNumber);
+
+        addLog(`***** NEXT ROUND STARTED (Round: ${game.roundNumber}) *****`)
 
         // 2. shift the 'starting player' - make the 'starting player' active
         if (game.startingPlayer >= game.activePlayers){
@@ -539,12 +562,28 @@ $(document).ready(function() {
         }
         else {
             $('#'+typeOfThingToChange+game.currentPlayer).text(currentValueOfThingToChange + valueOfThingToChange);
+            addLog(`Changed ${typeOfThingToChange} starting at ${currentValueOfThingToChange} changed by: ${valueOfThingToChange}`);
             $('#bigSwingInput').val('');
             $('#bigSwingInput').removeClass('backgroundGreen');
             $('#bigSwingInput').removeClass('backgroundRed');
             $('#bigSwingInput').addClass('backgroundBlue');
         }
     });
+
+    function addLog(logEntry) {
+        let thisPlayer = 'player' + game.currentPlayer;
+        let playerName = game[thisPlayer];
+        console.log(`Action # ${game.logActionNumber} was player: ${playerName} - they did: ${logEntry}`);
+
+        $(".table > tbody").prepend(
+            "<tr><td class='width10'>"  + game.logActionNumber + 
+            "</td><td class='width10'>" + playerName + 
+            "</td><td class='width60'>" + logEntry + 
+            "</td></tr>");
+
+        // prep for next action
+        game.logActionNumber++;
+    }
 
     // These remove the precision needed to click a different player
     // You can click any of the player stats and you're good to go.  
@@ -577,6 +616,5 @@ $(document).ready(function() {
         game.currentPlayer = 5;
         updateCurrentPlayer();
     });
-    
 
 }); // End document.ready

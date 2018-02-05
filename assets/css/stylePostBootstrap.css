@@ -121,3 +121,28 @@ tr:nth-child(7) {
     height: 90%;
     margin: 5%;
 }
+
+#logTable {
+    width: 100%;
+}
+
+#logTableHeader, #logTableBody {
+    display: block;
+}
+
+#logTableHeader {
+    width: 100%;
+}
+
+#logTableBody {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.width10 {
+    width: 10%;
+}
+
+.width60 {
+    width: 60%;
+}
