@@ -135,7 +135,7 @@
                         <div id="player5Label" class="pull-left"></div>
                         <div id="startingPlayer5" class="tinyWriting pull-right" hidden>Starting<br>Player</div>
                     </th>
-                    <th class="perRound text-center">Per<br>Round:</th>
+                    <th><div class="perRound text-center">Per<br>Round:</div></th>
                 </tr>
             </thead>
             <tbody>
@@ -150,7 +150,7 @@
                     <td class="player3" id="trTotal3">20</td>
                     <td class="player4" id="trTotal4">20</td>
                     <td class="player5" id="trTotal5">20</td>
-                    <td class="perRound"></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Money:</td>
@@ -178,9 +178,11 @@
                         <div id="moneyTotal5" class="col-xs-6">0</div>
                         <div id="moneyPerRound5" class="col-xs-6 perRound">0</div>
                     </td>
-                    <td class="perRound">
-                        <button class="clicky btn btn-success" math="plus" myTargetValue="moneyPerRound">+</button>
-                        <button class="clicky btn btn-danger" math="minus" myTargetValue="moneyPerRound">-</button>
+                    <td>
+                        <div class="perRound">
+                            <button class="clicky btn btn-success" math="plus" myTargetValue="moneyPerRound">+</button>
+                            <button class="clicky btn btn-danger" math="minus" myTargetValue="moneyPerRound">-</button>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -209,9 +211,11 @@
                         <div id="steelTotal5" class="col-xs-6">0</div>
                         <div id="steelPerRound5" class="col-xs-6 perRound">0</div>
                     </td>
-                    <td class="perRound">
-                        <button class="clicky btn btn-success" math="plus" myTargetValue="steelPerRound">+</button>
-                        <button class="clicky btn btn-danger" math="minus" myTargetValue="steelPerRound">-</button>
+                    <td>
+                        <div class="perRound">
+                            <button class="clicky btn btn-success" math="plus" myTargetValue="steelPerRound">+</button>
+                            <button class="clicky btn btn-danger" math="minus" myTargetValue="steelPerRound">-</button>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -240,9 +244,11 @@
                         <div id="titaniumTotal5" class="col-xs-6">0</div>
                         <div id="titaniumPerRound5" class="col-xs-6 perRound">0</div>
                     </td>
-                    <td class="perRound">
-                        <button class="clicky btn btn-success" math="plus" myTargetValue="titaniumPerRound">+</button>
-                        <button class="clicky btn btn-danger" math="minus" myTargetValue="titaniumPerRound">-</button>
+                    <td>
+                        <div class="perRound">
+                            <button class="clicky btn btn-success" math="plus" myTargetValue="titaniumPerRound">+</button>
+                            <button class="clicky btn btn-danger" math="minus" myTargetValue="titaniumPerRound">-</button>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -271,9 +277,11 @@
                         <div id="plantsTotal5" class="col-xs-6">0</div>
                         <div id="plantsPerRound5" class="col-xs-6 perRound">0</div>
                     </td>
-                    <td class="perRound">
-                        <button class="clicky btn btn-success" math="plus" myTargetValue="plantsPerRound">+</button>
-                        <button class="clicky btn btn-danger" math="minus" myTargetValue="plantsPerRound">-</button>
+                    <td>
+                        <div class="perRound">
+                            <button class="clicky btn btn-success" math="plus" myTargetValue="plantsPerRound">+</button>
+                            <button class="clicky btn btn-danger" math="minus" myTargetValue="plantsPerRound">-</button>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -302,9 +310,11 @@
                         <div id="energyTotal5" class="col-xs-6">0</div>
                         <div id="energyPerRound5" class="col-xs-6 perRound">0</div>
                     </td>
-                    <td class="perRound">
-                        <button class="clicky btn btn-success" math="plus" myTargetValue="energyPerRound">+</button>
-                        <button class="clicky btn btn-danger" math="minus" myTargetValue="energyPerRound">-</button>
+                    <td>
+                        <div class="perRound">
+                            <button class="clicky btn btn-success" math="plus" myTargetValue="energyPerRound">+</button>
+                            <button class="clicky btn btn-danger" math="minus" myTargetValue="energyPerRound">-</button>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -333,18 +343,16 @@
                         <div id="heatTotal5" class="col-xs-6">0</div>
                         <div id="heatPerRound5" class="col-xs-6 perRound">0</div>
                     </td>
-                    <td class="perRound">
-                        <button class="clicky btn btn-success" math="plus" myTargetValue="heatPerRound">+</button>
-                        <button class="clicky btn btn-danger" math="minus" myTargetValue="heatPerRound">-</button>
+                    <td>
+                        <div class="perRound">
+                            <button class="clicky btn btn-success" math="plus" myTargetValue="heatPerRound">+</button>
+                            <button class="clicky btn btn-danger" math="minus" myTargetValue="heatPerRound">-</button>
+                        </div>
                     </td>
                 </tr>
-
             </tbody>
         </table>
     </section>
-
-
-
 
     </wrapper>
     <div id="nextRoundModal" class="modal">
@@ -354,7 +362,6 @@
             <button id="confirmNextRound" class="btn-success form-control">Yep, next round please!</button>
             <br><br>
             <button id="notYetNextRound" class="btn-danger form-control">Noo!  Go back!</button>
-            
         </div>
     </div>
     <div id="setupGameModal" class="modal">

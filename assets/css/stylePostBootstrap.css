@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: rgb(159, 176, 253);
 }
 
 wrapper {
@@ -20,6 +21,7 @@ th {
 
 th, tr, td {
     text-align: center;
+    border-radius: 7px;
 }
 
 tr:nth-child(1) {
@@ -57,13 +59,16 @@ tr:nth-child(7) {
     border-bottom: 3px solid white;
 }
 
+.clicky {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 .perRound{
     border: 3px dashed rgb(109, 57, 9);
     background: url('../images/martian_surface.jpg') fixed; 
     color: white;
-    
-    
+    border-radius: 10px;
 }
 
 .buttonsForCSS {
@@ -76,10 +81,11 @@ tr:nth-child(7) {
 }
 
 .currentPlayer {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     background-color: rgb(251, 255, 198);
     font-size: 200%;
     z-index:100;
+    border-radius: 10px;
 }
 
 .tinyWriting {
@@ -113,6 +119,7 @@ tr:nth-child(7) {
 .startingPlayer {
     color: rgba(255,200,0,1);
     background-color: black;
+    border-radius: 10px;
 }
 
 .modal-content {
